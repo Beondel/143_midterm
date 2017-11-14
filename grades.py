@@ -23,7 +23,7 @@ for i in range(2, len(data)):
     score = data[i][12]
     if not math.isnan(score):
         sections[section].append(score)
-print(sections)
+
 section_means = {}
 section_medians = {}
 
@@ -39,13 +39,15 @@ for section in sections:
 
 
 class_avg = stat.mean(section_means.values())
+best_mean = max(section_means, key=section_means.get)
+best_median = max(section_medians, key=section_medians.get)
 
 print()
 print("Class average: " + str(class_avg))
 print("Class median: " + str(stat.median(section_medians.values())))
 print()
-print("Section with highest average score: " + str(max(section_means, key=section_means.get)) + str())
-print("Section with highest average median: " + str(max(section_medians, key=section_medians.get)) + str())
+print("Section with highest average score: " + str(best_mean) + " (" + str(section_means[best_mean]) + ")")
+print("Section with highest average median: " + str(best_median) + " (" + str(section_medians[best_median]) + ")")
 print("Best section objectively: AR")
 
 all_grades = []
@@ -57,7 +59,7 @@ for i in all_grades:
     if i not in grade_counts:
         grade_counts[i] = 0
     grade_counts[i] += 1
-print(grade_counts)
+
 
 x = grade_counts.keys()
 y = grade_counts.values()
